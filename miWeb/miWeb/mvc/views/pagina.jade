@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1=title
+  script.
+    function enableSelect() {
+        if(document.getElementById("slct").disabled===false)
+            document.getElementById("slct").disabled=true;
+        else
+            document.getElementById("slct").disabled=false;
+    }
+  script.
+    function precioItem() {
+        for (producto in productos){
+            document.getElementById("1").value="1";}
+    }
+  form(method='post', action="/pagina")
+  each producto, i in productos
+    p #{producto.nombre} #{producto.precio} €
+    input(name="#{producto.nombre}" type='text' size="2" value="")
+  p
+  input(type="submit" value="Siguiente")
+ // input(type="checkbox" name="productoc" onclick="enableSelect()")
+  select(id="slct" name="selectproductos" onclick="precioItem()" disabled="true")
+    each producto, i in productos
+        option(value="#{producto.nombre}") #{producto.nombre}//
+  
