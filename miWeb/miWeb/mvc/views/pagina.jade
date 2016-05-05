@@ -15,13 +15,9 @@ block content
             document.getElementById("1").value="1";}
     }
   form(method='post', action="/pagina")
-  each producto, i in productos
-    p #{producto.nombre} #{producto.precio} €
-    input(name="#{producto.nombre}" type='text' size="2" value="")
-  p
-  input(type="submit" value="Siguiente")
- // input(type="checkbox" name="productoc" onclick="enableSelect()")
-  select(id="slct" name="selectproductos" onclick="precioItem()" disabled="true")
     each producto, i in productos
-        option(value="#{producto.nombre}") #{producto.nombre}//
+        p #{producto.nombre} #{producto.precio} €
+        input(name="#{producto.nombre}" type='text' size="2" value="")
+    p
+    input(type="submit" value="Siguiente" class="btn btn-info")
   
