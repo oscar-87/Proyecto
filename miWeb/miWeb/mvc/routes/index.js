@@ -4,7 +4,6 @@ var controlador = require('../controladores/main');
 
 /* GET home page. */
 router.get('/', controlador.index);
+router.get('/pagina', controlador.select);
 router.post('/pagina',controlador.insert);
-router.get('/pagina',controlador.select);
-router.get('/pagina',controlador.selectPedidos);
 module.exports = router;

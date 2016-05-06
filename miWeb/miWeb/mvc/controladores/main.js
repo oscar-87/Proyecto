@@ -1,8 +1,6 @@
 var dataModel = require('../modelos/datos');
 /* GET home page */
 module.exports.index = function(req, res){
-console.log(req.session.id_ped);
-console.log(req.session.fecha);
 res.render('index', { title: 'Express' });
 };
 module.exports.pagina = function(req, res){
@@ -13,8 +11,12 @@ module.exports.select=function(req, res)
 {
     dataModel.getPedidos(function(error, data)
     {
-        req.session.id_ped=data[0].id;
-        req.session.fecha=data[0].fecha;
+        if (req.session) {
+            req.session.id_ped = data[0].id;
+            req.session.fecha = data[0].fecha;
+            console.log(req.session.id_ped);
+            console.log(req.session.fecha);
+        }
     });
     dataModel.getProductos(function(error, data)
     {
@@ -36,9 +38,6 @@ module.exports.select=function(req, res)
             res.json(404,{"msg":"notExist"});
         }
     });
-};
-module.exports.selectPedidos=function(req, res)
-{
 };
 module.exports.insert = function(req,res)
 {
