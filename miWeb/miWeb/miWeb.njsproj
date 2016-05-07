@@ -32,12 +32,15 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="bin\www" />
+    <Content Include="mvc\views\confirmacion.jade" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="mvc\" />
+    <Folder Include="mvc\views\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />

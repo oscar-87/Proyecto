@@ -4,6 +4,8 @@ var controlador = require('../controladores/main');
 
 /* GET home page. */
 router.get('/', controlador.index);
+router.post('/pagina', controlador.insert);
 router.get('/pagina', controlador.select);
-router.post('/pagina',controlador.insert);
+router.post('/confirmacion', controlador.setProdutos);
+
 module.exports = router;
