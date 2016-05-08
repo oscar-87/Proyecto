@@ -17,6 +17,7 @@ module.exports.select=function(req, res)
                 req.session.fecha = data[0].fecha;
                 console.log("ID: " + req.session.id_ped);
                 console.log("FECHA: " + req.session.fecha);
+                console.log(req.ip);
             }
         });
         if (typeof data !== 'undefined')
@@ -49,7 +50,7 @@ module.exports.insert = function(req,res)
     });
 };
 
-module.exports.setProdutos = function (req, res) {
+module.exports.setProductos = function (req, res) {
     var cantidad = {};
     cantidad = req.body.pepito
     for (i = 0; i < cantidad.length; i++)

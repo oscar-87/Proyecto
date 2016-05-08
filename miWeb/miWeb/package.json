@@ -17,6 +17,7 @@
     "morgan": "~1.6.1",
     "mysql": "^2.10.2",
     "pug": "^0.1.0",
+    "request-ip": "^1.2.2",
     "serve-favicon": "~2.3.0"
   }
 }
