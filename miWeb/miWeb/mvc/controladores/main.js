@@ -7,7 +7,15 @@ module.exports.index = function (req, res) {
 module.exports.pagina = function(req, res){
 res.render('pagina', { title: 'Express' });
 };
-var produc= {};
+module.exports.confirmacion = function (req, res) {
+    res.render('confirmacion', { title: 'Express' });
+};
+module.exports.pedidoRealizado = function (req, res) {
+    res.render('pedidoRealizado', { title: 'Express' });
+};
+var produc = {};
+var pedidos = [];
+
 module.exports.select=function(req, res)
 {
     dataModel.getPedidos(function (error, data) {
@@ -49,7 +57,7 @@ module.exports.insert = function(req,res)
     });
 };
 
-module.exports.setProductos = function (req, res) {
+module.exports.setProduc = function (req, res) {
     if (req.session) {
         var cantidades = {};
         var nombres = [];
@@ -57,6 +65,7 @@ module.exports.setProductos = function (req, res) {
         var precios = [];
         var cont = 0;
         var pedido = req.session.id_ped;
+        var dat = [];
         cantidades = req.body.pepito
         console.log(req.session.id_ped);
         for (i = 0; i < cantidades.length; i++) {
@@ -65,27 +74,40 @@ module.exports.setProductos = function (req, res) {
                 identificadores[cont] = produc[i].id;
                 nombres[cont] = produc[i].nombre;
                 precios[cont] = produc[i].precio;
-                datos = { id: null, idPRODUCTOS: produc[i].id, idPEDIDOS: pedido,precio: produc[i].precio,cantidad: cantidades[i], num_mesa: 2 };
-                dataModel.setProductos(datos, function (error, data) {
-                    if (data && data.insertId) {
-                        res.redirect('/confirmacion' + data.insertId);
-                    }
-                    else {
-                        res.json(500, { "msg": "Error" });
-                    }
-                });
+                datos = { id: null, idPRODUCTOS: produc[i].id, idPEDIDOS: pedido, precio: produc[i].precio, cantidad: cantidades[i], num_mesa: 2 };
+                pedidos[cont] = datos;
+                dat[cont] = { nombre: produc[i].nombre, precio: produc[i].precio };
                 //console.log(cantidad[i] + " " + produc[i]+" "+nombres[cont]);
                 cont++;
             }
         }
+        res.render('confirmacion', {
+            title : 'Pedidos ', pedidos: dat
+        });
+        //res.redirect('/confirmacion');
         //console.log(nombres[0]);
         //console.log(nombres.length);
         //console.log(produc[0]);
         //console.log(cantidad.length);
-        for (i = 0; i < nombres.length; i++) {
+       /* for (i = 0; i < nombres.length; i++) {
             console.log(identificadores[i] + " " + nombres[i] + " " + precios[i]);
         }
-        res.send("Recibimos tus datos");
+       res.render("confirmacion");
+        for (i = 0; i < dat.length; i++)
+            console.log(pedidos);*/
+           // res.send(dat[i]);
+            //rend.send(dat[i]);
     }
+    module.exports.insertProduct = function (req, res) {
 
+        dataModel.setProductos(pedidos, function (error, data)
+            {
+            if (data && data.insertId) {
+                res.redirect('/pedidoRealizado');
+            }
+            else {
+                res.json(500, { "msg": "Error" });
+            }
+        });
+    };
 };

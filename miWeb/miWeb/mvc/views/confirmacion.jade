@@ -1,4 +1,10 @@
 ﻿extends layout
   
 block content
-    h1 CONFIRMAR DATOS
+    center
+        h1 CONFIRMAR DATOS
+        h3 Comprueba los datos y dale a confirmar si está todo correcto
+        each pedido, i in pedidos
+            p #{pedido.nombre} #{pedido.precio} €
+        form(method='post', action="/pedidoRealizado")
+            input(type="submit" value="Confirmar" class="btn btn-info")
