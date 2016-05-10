@@ -113,3 +113,13 @@ module.exports.insertProduct = function (req, res) {
         });
     }
 };
+module.exports.totalFactura = function (req, res) {
+    var ped = req.session.id_ped;
+    console.log(ped);
+    dataModel.getPedidoActual(ped, function (error, data) {
+        console.log(data);
+        res.render('TotalFactura', {
+            title : 'Importe ', total: data
+        });
+    });
+};

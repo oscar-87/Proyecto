@@ -81,5 +81,29 @@ dataModel.setProductos = function (dataProductos,callback) {
         });
     }
 };
+dataModel.getPedidoActual = function (pedido, callback) {
+    if (connection) {
+        connection.query('SELECT Round(sum(TotalFactura(idPEDIDOS)),2) as Total FROM pedidoproductos where idPEDIDOS=? ',pedido, function (error, rows) {
+            if (error) {
+                throw error;
+            }
+            else {
+                callback(null, rows);
+            }
+        });
+    }
+};
+dataModel.setImporte = function (pedido,importe, callback) {
+    if (connection) {
+        connection.query('UPDATE pedidos SET importe=? where id=?', importe,pedido, function (error, result) {
+            if (error) {
+                throw error;
+            }
+            else {
+                callback(null, { "insertId" : result.insertId });
+            }
+        });
+    }
+};
 //exportamos el objeto para tenerlo disponible en la zona de rutas
 module.exports = dataModel;
