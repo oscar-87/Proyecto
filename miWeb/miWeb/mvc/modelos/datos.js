@@ -93,9 +93,9 @@ dataModel.getPedidoActual = function (pedido, callback) {
         });
     }
 };
-dataModel.setImporte = function (pedido,importe, callback) {
+dataModel.setImporte = function (pedido,importe,callback) {
     if (connection) {
-        connection.query('UPDATE pedidos SET Importe = 20.0', function (error, result) {
+        connection.query('UPDATE pedidos SET Importe='+importe+' where id='+pedido, function (error, result) {
             if (error) {
                 throw error;
             }

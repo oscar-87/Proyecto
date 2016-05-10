@@ -115,7 +115,7 @@ module.exports.insertProduct = function (req, res) {
 };
 var ped;
 var importe = 0;
-/*module.exports.totalFactura = function (req, res) {
+module.exports.totalFactura = function (req, res) {
     ped = req.session.id_ped;
     dataModel.getPedidoActual(ped, function (error, data) {
         importe = data[0].Total;
@@ -125,10 +125,7 @@ var importe = 0;
             title : 'Importe ', total: data
         });
     });
-
-};*/
-module.exports.setImporte = function (req, res) {
-    dataModel.setImporte(ped, importe, function (error, data) {
+    dataModel.setImporte(ped,importe,function (error, data) {
         if (data && data.msg) {
             res.redirect("/TotalFactura" + req.param('id'));
         }
