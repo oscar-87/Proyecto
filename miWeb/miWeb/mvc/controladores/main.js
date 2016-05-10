@@ -98,16 +98,18 @@ module.exports.setProduc = function (req, res) {
            // res.send(dat[i]);
             //rend.send(dat[i]);
     }
-    module.exports.insertProduct = function (req, res) {
-
-        dataModel.setProductos(pedidos, function (error, data)
-            {
+};
+module.exports.insertProduct = function (req, res) {
+    for (i = 0; i < pedidos.length; i++) {
+        var ped = {};
+        ped = pedidos[i];
+        dataModel.setProductos(ped, function (error, data) {
             if (data && data.insertId) {
-                res.redirect('/pedidoRealizado');
+                res.render('pedidoRealizado');
             }
             else {
                 res.json(500, { "msg": "Error" });
             }
         });
-    };
+    }
 };

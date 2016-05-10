@@ -7,4 +7,6 @@ block content
         each pedido, i in pedidos
             p #{pedido.nombre} #{pedido.precio} €
         form(method='post', action="/pedidoRealizado")
+            input(type="submit" value="Volver atrás" onclick="history.back()" class="btn btn-info")
+            &nbsp
             input(type="submit" value="Confirmar" class="btn btn-info")

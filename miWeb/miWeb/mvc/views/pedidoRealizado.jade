@@ -1,5 +1,10 @@
 ﻿extends layout
   
 block content
-    h1 DATOS CONFIRMADOS
-    p Su pedido se ha realizado correctamente
+    center
+        h1 DATOS CONFIRMADOS
+        h2 Su pedido se ha realizado correctamente
+        form(method='post', action="/pagina")
+                input(type="submit" value="Añadir al pedido" class="btn btn-info")
+                &nbsp
+                input(type="submit" value="Terminar pedido y Pagar" class="btn btn-info")

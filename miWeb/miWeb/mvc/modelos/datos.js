@@ -69,7 +69,7 @@ dataModel.setPedido = function(callback)
 };
 
 dataModel.setProductos = function (dataProductos,callback) {
-
+    
     if (connection) {
         connection.query('INSERT INTO pedidoproductos SET ?', dataProductos, function (error, result) {
             if (error) {
