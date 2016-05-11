@@ -84,19 +84,6 @@ module.exports.setProduc = function (req, res) {
         res.render('confirmacion', {
             title : 'Pedidos ', pedidos: dat
         });
-        //res.redirect('/confirmacion');
-        //console.log(nombres[0]);
-        //console.log(nombres.length);
-        //console.log(produc[0]);
-        //console.log(cantidad.length);
-       /* for (i = 0; i < nombres.length; i++) {
-            console.log(identificadores[i] + " " + nombres[i] + " " + precios[i]);
-        }
-       res.render("confirmacion");
-        for (i = 0; i < dat.length; i++)
-            console.log(pedidos);*/
-           // res.send(dat[i]);
-            //rend.send(dat[i]);
     }
 };
 module.exports.insertProduct = function (req, res) {
@@ -113,24 +100,25 @@ module.exports.insertProduct = function (req, res) {
         });
     }
 };
-var ped;
-var importe = 0;
 module.exports.totalFactura = function (req, res) {
-    ped = req.session.id_ped;
+    var importe = 0;
+    var ped = req.session.id_ped;
     dataModel.getPedidoActual(ped, function (error, data) {
         importe = data[0].Total;
-        console.log(importe);
-        console.log(data);
-        res.render('TotalFactura', {
-            title : 'Importe ', total: data
+        dataModel.setImporte(p, importe, function (error2, data1) {
+            console.log(p);
+            console.log(importe);
+            //if (data1 && data1.msg) {
+            //res.render('TotalFactura');
+                res.render('TotalFactura', {
+                    title : 'Importe ', total: data
+                });
+            // res.redirect("/TotalFactura" + req.param('id'));
+            /*}
+            else {
+                res.json(500, { "msg": "Error" });
+                console.log("no se ha insertado");
+            }*/
         });
-    });
-    dataModel.setImporte(ped,importe,function (error, data) {
-        if (data && data.msg) {
-            res.redirect("/TotalFactura" + req.param('id'));
-        }
-        else {
-            res.json(500, { "msg": "Error" });
-        }
     });
 };
