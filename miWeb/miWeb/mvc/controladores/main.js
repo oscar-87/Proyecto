@@ -105,8 +105,8 @@ module.exports.totalFactura = function (req, res) {
     var ped = req.session.id_ped;
     dataModel.getPedidoActual(ped, function (error, data) {
         importe = data[0].Total;
-        dataModel.setImporte(p, importe, function (error2, data1) {
-            console.log(p);
+        dataModel.setImporte(ped, importe, function (error2, data1) {
+            console.log(ped);
             console.log(importe);
             //if (data1 && data1.msg) {
             //res.render('TotalFactura');
