@@ -17,7 +17,7 @@ block content
   form(method='post', action="/confirmacion")
     each producto, i in productos
         p #{producto.nombre} #{producto.precio} €
-        input(name="pepito" type='text' size="2" value="")
+        input(name="cantidad" type='text' size="2" value="")
     p
     input(type="submit" value="Siguiente" class="btn btn-info")
   

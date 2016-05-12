@@ -67,7 +67,7 @@ module.exports.setProduc = function (req, res) {
         var pedido = req.session.id_ped;
         p = pedido;
         var dat = [];
-        cantidades = req.body.pepito
+        cantidades = req.body.cantidad
         //console.log(req.session.id_ped);
         //console.log(cantidades.length);
         for (i = 0; i < cantidades.length; i++) {
