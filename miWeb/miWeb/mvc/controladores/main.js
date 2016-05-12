@@ -10,9 +10,9 @@ res.render('pagina', { title: 'Express' });
 module.exports.confirmacion = function (req, res) {
     res.render('confirmacion', { title: 'Express' });
 };
-module.exports.pedidoRealizado = function (req, res) {
+/*module.exports.pedidoRealizado = function (req, res) {
     res.render('pedidoRealizado', { title: 'Express' });
-};
+};*/
 var produc = {};
 var pedidos = [];
 
@@ -80,11 +80,12 @@ module.exports.setProduc = function (req, res) {
                 pedidos[cont] = datos;
                 dat[cont] = { nombre: produc[i].nombre, precio: produc[i].precio };
                 //console.log(cantidad[i] + " " + produc[i]+" "+nombres[cont]);
+                console.log("Precio "+produc[i].precio);
                 cont++;
             }
         }
         res.render('confirmacion', {
-            title : 'Pedidos ', pedidos: dat
+            title : 'Pedidos ', pedidos: dat, canti:cantidades
         });
     }
 };
@@ -92,16 +93,15 @@ module.exports.insertProduct = function (req, res) {
     var datosPedido = [];
     var datos;
     var correcto = true;
-    for (i = 0; i < pedidos.length && correcto; i++) {
+    console.log("pedido:"+pedidos.length);
+    for (i = 0; i < pedidos.length; i++) {
         var ped = {};
         var prd = 0, precio = 0, cant = 0, mesa = 0;
         ped = pedidos[i];
         datosPedido[i] = ped;
-        console.log(ped.idPEDIDOS);
-        console.log(ped.precio);
-        console.log(ped.cantidad);
         prd = ped.idPRODUCTOS;
         precio = ped.precio;
+        console.log("Prec:"+precio);
         cant = ped.cantidad;
         mesa = ped.num_mesa;
         dataModel.setProductos(parseInt(p), parseInt(prd),parseFloat(precio), parseInt(cant), parseInt(mesa), function (error, data) {
@@ -123,8 +123,8 @@ module.exports.totalFactura = function (req, res) {
     dataModel.getPedidoActual(ped, function (error, data) {
         importe = data[0].Total;
         dataModel.setImporte(parseInt(ped),parseFloat(importe), function (error2, data1) {
-            console.log(ped);
-            console.log(importe);
+            console.log("Pedido:"+ped);
+            console.log("Importe:"+importe);
             if (data1 && data1.msg) {
             //res.render('TotalFactura');
                 res.render('TotalFactura', {

@@ -104,6 +104,6 @@ dataModel.setImporte = function (pedido,importe,callback) {
             }
         });
     }
-};
+};//
 //exportamos el objeto para tenerlo disponible en la zona de rutas 
 module.exports = dataModel;

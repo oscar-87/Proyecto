@@ -4,9 +4,14 @@ block content
     center
         h1 CONFIRMAR DATOS
         h3 Comprueba los datos y dale a confirmar si está todo correcto
-        each pedido, i in pedidos
-            p #{pedido.nombre} #{pedido.precio} €
-        form(method='post', action="/pedidoRealizado")
-            input(type="submit" value="Volver atrás" onclick="history.back()" class="btn btn-info")
-            &nbsp
-            input(type="submit" value="Confirmar" class="btn btn-info")
+        div(style="padding: 10px; float: left; width: 50%; text-align: justify;")
+            each cant, i in canti
+                h5 #{cant}
+        div(style="padding: 5px; float: left; width: 50%; text-align: justify;")
+            each pedido, i in pedidos
+                h5 #{pedido.nombre}
+        div
+            form(method='post', action="/pedidoRealizado")
+                input(type="submit" value="Volver atrás" onclick="history.back()" class="btn btn-info")
+                &nbsp
+                input(type="submit" value="Confirmar" class="btn btn-info")
