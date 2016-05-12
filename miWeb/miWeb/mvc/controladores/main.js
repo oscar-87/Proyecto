@@ -31,8 +31,8 @@ module.exports.select=function(req, res)
         {
             req.session.datos = {};
             var text=" ";
-            for(i=0;i<data.length;i++)
-            {
+            for(i=0;i<data.length;i++) {
+               // produc = {};
                 text += data[i].nombre + "\n";
                 produc[i] = data[i];
                 req.session.datos[i] = data[i].id;
@@ -56,7 +56,7 @@ module.exports.insert = function(req,res)
         res.redirect('/pagina');
     });
 };
-
+var p=0;
 module.exports.setProduc = function (req, res) {
     if (req.session) {
         var cantidades = {};
@@ -65,9 +65,11 @@ module.exports.setProduc = function (req, res) {
         var precios = [];
         var cont = 0;
         var pedido = req.session.id_ped;
+        p = pedido;
         var dat = [];
         cantidades = req.body.pepito
-        console.log(req.session.id_ped);
+        //console.log(req.session.id_ped);
+        //console.log(cantidades.length);
         for (i = 0; i < cantidades.length; i++) {
             var datos = {};
             if (cantidades[i] != "") {
@@ -87,38 +89,53 @@ module.exports.setProduc = function (req, res) {
     }
 };
 module.exports.insertProduct = function (req, res) {
-    for (i = 0; i < pedidos.length; i++) {
+    var datosPedido = [];
+    var datos;
+    var correcto = true;
+    for (i = 0; i < pedidos.length && correcto; i++) {
         var ped = {};
+        var prd = 0, precio = 0, cant = 0, mesa = 0;
         ped = pedidos[i];
-        dataModel.setProductos(ped, function (error, data) {
+        datosPedido[i] = ped;
+        console.log(ped.idPEDIDOS);
+        console.log(ped.precio);
+        console.log(ped.cantidad);
+        prd = ped.idPRODUCTOS;
+        precio = ped.precio;
+        cant = ped.cantidad;
+        mesa = ped.num_mesa;
+        dataModel.setProductos(parseInt(p), parseInt(prd),parseFloat(precio), parseInt(cant), parseInt(mesa), function (error, data) {
             if (data && data.insertId) {
-                res.render('pedidoRealizado');
+                correcto = false;
+            //res.redirect('/pedidoRealizado');
             }
-            else {
-                res.json(500, { "msg": "Error" });
-            }
+
         });
     }
+    if (correcto)
+        res.render('pedidoRealizado');
+    else
+        res.json(500, { "msg": "Error" });
 };
 module.exports.totalFactura = function (req, res) {
     var importe = 0;
     var ped = req.session.id_ped;
     dataModel.getPedidoActual(ped, function (error, data) {
         importe = data[0].Total;
-        dataModel.setImporte(ped, importe, function (error2, data1) {
+        dataModel.setImporte(parseInt(ped),parseFloat(importe), function (error2, data1) {
             console.log(ped);
             console.log(importe);
-            //if (data1 && data1.msg) {
+            if (data1 && data1.msg) {
             //res.render('TotalFactura');
                 res.render('TotalFactura', {
                     title : 'Importe ', total: data
                 });
             // res.redirect("/TotalFactura" + req.param('id'));
-            /*}
+            }
             else {
                 res.json(500, { "msg": "Error" });
                 console.log("no se ha insertado");
-            }*/
+            }
         });
     });
 };

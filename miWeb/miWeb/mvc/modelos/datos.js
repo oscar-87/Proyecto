@@ -68,10 +68,10 @@ dataModel.setPedido = function(callback)
     }
 };
 
-dataModel.setProductos = function (dataProductos,callback) {
-    
+dataModel.setProductos = function (ped,prod,precio,cantidad,mesa,callback) {
     if (connection) {
-        connection.query('INSERT INTO pedidoproductos SET ?', dataProductos, function (error, result) {
+        connection.query('INSERT INTO pedidoproductos(idPRODUCTOS,idPEDIDOS,precio,cantidad,num_mesa) VALUES(' 
+            + prod +',' + ped + ','+ precio +',' +  cantidad + ',' + mesa+')', function (error, result) {
             if (error) {
                 throw error;
             }
@@ -95,12 +95,12 @@ dataModel.getPedidoActual = function (pedido, callback) {
 };
 dataModel.setImporte = function (pedido,importe,callback) {
     if (connection) {
-        connection.query('UPDATE pedidos SET Importe ='+importe+' where id='+pedido, function (error, result) {
+        connection.query('UPDATE pedidos SET Importe =' + importe + ' where id=' + pedido, function (error, result) {
             if (error) {
                 throw error;
             }
             else {
-                callback(null, { "insertId" : result.insertId });
+                callback(null, { "msg": "success" });
             }
         });
     }
