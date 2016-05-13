@@ -78,14 +78,15 @@ module.exports.setProduc = function (req, res) {
                 precios[cont] = produc[i].precio;
                 datos = { id: null, idPRODUCTOS: produc[i].id, idPEDIDOS: pedido, precio: produc[i].precio, cantidad: cantidades[i], num_mesa: 2 };
                 pedidos[cont] = datos;
-                dat[cont] = { nombre: produc[i].nombre, precio: produc[i].precio };
+                dat[cont] = { cantidad: cantidades[i], nombre:produc[i].nombre};
                 //console.log(cantidad[i] + " " + produc[i]+" "+nombres[cont]);
                 console.log("Precio "+produc[i].precio);
                 cont++;
             }
+            console.log(dat);
         }
         res.render('confirmacion', {
-            title : 'Pedidos ', pedidos: dat, canti:cantidades
+            title : 'Pedidos ', pedidos: dat
         });
     }
 };
@@ -100,9 +101,9 @@ module.exports.insertProduct = function (req, res) {
         ped = pedidos[i];
         datosPedido[i] = ped;
         prd = ped.idPRODUCTOS;
-        precio = ped.precio;
-        console.log("Prec:"+precio);
         cant = ped.cantidad;
+        precio = ped.precio * cant;
+        console.log("Prec:"+precio);
         mesa = ped.num_mesa;
         dataModel.setProductos(parseInt(p), parseInt(prd),parseFloat(precio), parseInt(cant), parseInt(mesa), function (error, data) {
             if (data && data.insertId) {
@@ -120,6 +121,7 @@ module.exports.insertProduct = function (req, res) {
 module.exports.totalFactura = function (req, res) {
     var importe = 0;
     var ped = req.session.id_ped;
+    console.log("Pedidooooo:"+ped);
     dataModel.getPedidoActual(ped, function (error, data) {
         importe = data[0].Total;
         dataModel.setImporte(parseInt(ped),parseFloat(importe), function (error2, data1) {

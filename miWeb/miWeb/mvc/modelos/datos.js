@@ -70,8 +70,8 @@ dataModel.setPedido = function(callback)
 
 dataModel.setProductos = function (ped,prod,precio,cantidad,mesa,callback) {
     if (connection) {
-        connection.query('INSERT INTO pedidoproductos(idPRODUCTOS,idPEDIDOS,precio,cantidad,num_mesa) VALUES(' 
-            + prod +',' + ped + ','+ precio +',' +  cantidad + ',' + mesa+')', function (error, result) {
+        connection.query('INSERT INTO pedidoproductos(idPRODUCTOS,idPEDIDOS,cantidad,precio,num_mesa) VALUES(' 
+            + prod +',' + ped + ','+ cantidad +',' +  precio + ',' + mesa+')', function (error, result) {
             if (error) {
                 throw error;
             }
@@ -82,8 +82,10 @@ dataModel.setProductos = function (ped,prod,precio,cantidad,mesa,callback) {
     }
 };
 dataModel.getPedidoActual = function (pedido, callback) {
+    //Round(SUM(TotalFactura(idPEDIDOS)),2)
+    //SELECT SUM(precio) as Total FROM pedidoproductos where idPEDIDOS=?
     if (connection) {
-        connection.query('SELECT Round(sum(TotalFactura(idPEDIDOS)),2) as Total FROM pedidoproductos where idPEDIDOS=? ',pedido, function (error, rows) {
+        connection.query('SELECT SUM(precio) as Total FROM pedidoproductos where idPEDIDOS=?',pedido, function (error, rows) {
             if (error) {
                 throw error;
             }

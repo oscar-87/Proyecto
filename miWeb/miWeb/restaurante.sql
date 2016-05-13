@@ -26,10 +26,9 @@ DELIMITER $$
 --
 CREATE DEFINER=`root`@`localhost` FUNCTION `TotalFactura` (`id` INT(10)) RETURNS DOUBLE READS SQL DATA
 RETURN (
-  SELECT SUM(precio * cantidad)
+  SELECT precio * cantidad
   FROM   pedidoproductos
   WHERE  idPEDIDOS = id
-  limit 1
 )$$
 
 DELIMITER ;
