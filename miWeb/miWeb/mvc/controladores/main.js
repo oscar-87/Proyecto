@@ -18,6 +18,7 @@ var pedidos = [];
 
 module.exports.select=function(req, res)
 {
+    var ip =req.connection.remoteAddress;
     dataModel.getPedidos(function (error, data) {
         if (req.session) {
             req.session.id_ped = data[0].id;
@@ -25,6 +26,7 @@ module.exports.select=function(req, res)
             console.log("FECHA: " + req.session.fecha);
         }
     });
+    console.log(ip);
     dataModel.getProductos(function(error, data)
     {
         if (typeof data !== 'undefined')
