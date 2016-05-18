@@ -4,11 +4,9 @@ block content
     center
         h1 CONFIRMAR DATOS
         h3 Comprueba los datos y dale a confirmar si está todo correcto
-        div.form-group
-            each pedido, i in pedidos
-                p #{pedido.cantidad} #{pedido.nombre}
-        div
-            form(method='post', action="/pedidoRealizado")
-                input(type="submit" value="Volver atrás" onclick="history.back()" class="btn btn-info")
-                &nbsp
-                input(type="submit" value="Confirmar" class="btn btn-info")
+        each pedido, i in pedidos
+            h5  #{pedido.cantidad} #{pedido.nombre}
+        form(method='post', action="/pedidoRealizado")
+            input(type="submit" value="Volver atrás" onclick="history.back()" class="btn btn-info")
+            &nbsp
+            input(type="submit" value="Confirmar" class="btn btn-info")
