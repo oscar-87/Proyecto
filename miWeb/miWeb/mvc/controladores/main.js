@@ -107,10 +107,11 @@ module.exports.insertProduct = function (req, res) {
         datosPedido[i] = ped;
         prd = ped.idPRODUCTOS;
         cant = parseInt(ped.cantidad);
-        precio = parseFloat(ped.precio)*cant;
+        precio = parseFloat(ped.precio) * cant;
         console.log("Prec:"+precio);
         mesa = ped.num_mesa;
-        dataModel.setProductos(parseInt(p), parseInt(prd),precio, cant, parseInt(mesa), function (error, data) {
+        console.log(p + "," + prd + "," + cant + "," + mesa);
+        dataModel.setProductos(parseInt(p), parseInt(prd),parseFloat(precio), parseInt(cant), 2, function (error, data) {
             if (data && data.insertId) {
                 correcto = false;
             //res.redirect('/pedidoRealizado');

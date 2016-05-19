@@ -70,8 +70,8 @@ dataModel.setPedido = function(callback)
 
 dataModel.setProductos = function (ped,prod,precio,cantidad,mesa,callback) {
     if (connection) {
-        connection.query('INSERT INTO pedidoproductos(idPRODUCTOS,idPEDIDOS,precio,cantidad,num_mesa) VALUES(' 
-            + prod +',' + ped + ','+ precio +',' +  cantidad + ',' + mesa+')', function (error, result) {
+        connection.query('INSERT INTO pedidoproductos(idPRODUCTOS,idPEDIDOS,cantidad,precio,num_mesa) VALUES(' 
+            + prod +',' + ped + ','+ cantidad +',' +  precio + ',' + mesa+')', function (error, result) {
             if (error) {
                 throw error;
             }

@@ -2,22 +2,25 @@ extends layout
 
 block content
   center
-    h1=title
+    h1
+            span.label.label-primary PRODUCTOS
     form(method='post', action="/confirmacion")
-        div(class="row")
+      div(class="row")
+        table(class="table")
             div(class="col-md-2")
             div(class="col-md-4")
-                    h3 BEBIDA
-                    each producto, i in productos
-                        if(producto.tipo=="Bebida")
-                            p #{producto.nombre} #{producto.precio}  €
-                            input(name="cantidad" type='number' min="0" max="99" size="2" value="")
+                h3 
+                    span.label.label-warning BEBIDA
+                each producto, i in productos
+                    if(producto.tipo=="Bebida")
+                        p #{producto.nombre} #{producto.precio}  €
+                        input(name="cantidad" type='number' min="0" max="50" value="" placeholder="Cantidad")
             div(class="col-md-4")
-                    h3 COMIDA
-                    each producto, i in productos
-                        if(producto.tipo=="Comida")
-                            p #{producto.nombre} #{producto.precio} €
-                            input(name="cantidad" type='number' min="0" max="99" size="2" value="")
+                h3 
+                    span.label.label-warning COMIDA
+                each producto, i in productos
+                    if(producto.tipo=="Comida")
+                        p #{producto.nombre} #{producto.precio} €
+                        input(name="cantidad" type='number' min="0" max="50" value="" placeholder="Cantidad")
          p
-         input(style='width:100px; height:50px' type="submit" value="Siguiente" class="btn btn-info")
-  
+         input(style='width:100px; height:50px' type="submit" value="Siguiente" class="btn btn-lg btn-info")     
