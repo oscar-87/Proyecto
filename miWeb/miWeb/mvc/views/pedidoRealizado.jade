@@ -1,11 +1,12 @@
 ﻿extends layout
   
 block content
+  body(style="background:url('images/food.jpg')")
     center
         h1 DATOS CONFIRMADOS
-        h2 Su pedido se ha realizado correctamente
+        h21 Su pedido se ha realizado correctamente
         form(method='get', action="/pagina")
-                input(type="submit" value="Añadir al pedido" class="btn btn-lg btn-info")
+                input(type="submit" value="Añadir al pedido" class="btn btn-lg btn-info" style="width:250px;height:50px; font-size:30px")
         &nbsp
         form(method='post', action="/TotalFactura")
-                input(type="submit" value="Terminar pedido y Pagar" class="btn btn-lg btn-danger")
+                input(type="submit" value="Terminar y Pagar" class="btn btn-lg btn-danger" style="width:250px;height:50px; font-size:30px")

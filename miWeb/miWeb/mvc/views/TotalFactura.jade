@@ -1,12 +1,13 @@
 ﻿extends layout
   
 block content
-    each t, i in total
-        center
-            h1 FACTURA
-            p
-            h2 Importe Total= #{t.Total} €
-            p
-            h3 Gracias por su confianza
-            form(method='get', action="/")
-                input(type="submit" value="Inicio" class="btn btn-lg btn-info")
+    body(style="background:url('images/credit.jpg')")
+        each t, i in total
+            center
+                h1 FACTURA
+                p
+                h2 Importe Total= #{t.Total} €
+                p
+                h3 Gracias por su confianza
+                form(method='get', action="/")
+                    input(type="submit" value="Inicio" class="btn btn-lg btn-info" style="width:200px;height:50px; font-size:30px")

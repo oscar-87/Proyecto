@@ -1,26 +1,24 @@
 extends layout
 
 block content
-  center
-    h1
-            span.label.label-primary PRODUCTOS
-    form(method='post', action="/confirmacion")
-      div(class="row")
-        table(class="table")
-            div(class="col-md-2")
-            div(class="col-md-4")
-                h3 
-                    span.label.label-warning BEBIDA
-                each producto, i in productos
-                    if(producto.tipo=="Bebida")
-                        p #{producto.nombre} #{producto.precio}  €
-                        input(name="cantidad" type='number' min="0" max="50" value="" placeholder="Cantidad")
-            div(class="col-md-4")
-                h3 
-                    span.label.label-warning COMIDA
-                each producto, i in productos
-                    if(producto.tipo=="Comida")
-                        p #{producto.nombre} #{producto.precio} €
-                        input(name="cantidad" type='number' min="0" max="50" value="" placeholder="Cantidad")
-         p
-         input(style='width:100px; height:50px' type="submit" value="Siguiente" class="btn btn-lg btn-info")     
+    body(style="background:url('images/restaurante.jpg')")
+      center
+        h21 PRODUCTOS
+        form(method='post', action="/confirmacion")
+            div(class="container_12")
+                h2 BEBIDA
+                h4
+                    each producto, i in productos
+                        if(producto.tipo=="Bebida")
+                            p #{producto.nombre} #{producto.precio}  €
+                            input(name="cantidad" type='number' min="0" max="50" value="" placeholder="CANTIDAD" style="width:200px;height:50px;font-size:30px")
+                div(class="container_12")
+                    h2 COMIDA
+                    h4
+                      each producto, i in productos
+                        if(producto.tipo=="Comida")
+                          p #{producto.nombre} #{producto.precio} €
+                          input(name="cantidad" type='number' min="0" max="50" value="" placeholder="CANTIDAD" style="width:200px;height:50px;font-size:30px")
+                div(class="btns")
+                  button(type='submit')
+                    img(src='images/arrowws2.png', alt='')
