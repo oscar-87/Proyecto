@@ -68,10 +68,10 @@ dataModel.setPedido = function(callback)
     }
 };
 
-dataModel.setProductos = function (ped,prod,precio,cantidad,mesa,callback) {
+dataModel.setProductos = function (dataProductos,callback) {
+
     if (connection) {
-        connection.query('INSERT INTO pedidoproductos(idPRODUCTOS,idPEDIDOS,cantidad,precio,num_mesa) VALUES(' 
-            + prod +',' + ped + ','+ cantidad +',' +  precio + ',' + mesa+')', function (error, result) {
+        connection.query('INSERT INTO pedidoproductos SET ?', dataProductos, function (error, result) {
             if (error) {
                 throw error;
             }
@@ -81,29 +81,5 @@ dataModel.setProductos = function (ped,prod,precio,cantidad,mesa,callback) {
         });
     }
 };
-dataModel.getPedidoActual = function (pedido, callback) {
-    if (connection) {
-        connection.query('SELECT Round(sum(precio),2) as Total FROM pedidoproductos where idPEDIDOS=? ',pedido, function (error, rows) {
-            if (error) {
-                throw error;
-            }
-            else {
-                callback(null, rows);
-            }
-        });
-    }
-};
-dataModel.setImporte = function (pedido,importe,callback) {
-    if (connection) {
-        connection.query('UPDATE pedidos SET Importe =' + importe + ' where id=' + pedido, function (error, result) {
-            if (error) {
-                throw error;
-            }
-            else {
-                callback(null, { "msg": "success" });
-            }
-        });
-    }
-};//
-//exportamos el objeto para tenerlo disponible en la zona de rutas 
+//exportamos el objeto para tenerlo disponible en la zona de rutas
 module.exports = dataModel;

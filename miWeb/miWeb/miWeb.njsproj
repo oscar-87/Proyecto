@@ -32,15 +32,10 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="bin\www" />
-    <Content Include="public\images\fondo.jpg" />
     <Content Include="mvc\views\confirmacion.jade" />
-    <Content Include="mvc\views\pedidoRealizado.jade" />
-    <Content Include="mvc\views\TotalFactura.jade" />
     <Content Include="package.json" />
-    <Content Include="public\stylesheets\style.css" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
-    <Content Include="restaurante.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />

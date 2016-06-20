@@ -1,12 +1,10 @@
 var express = require('express');
 var path = require('path');
-var net = require('net');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require("express-session");
-var requestIp = require('request-ip');
+var session=require("express-session");
 
 var routes = require('./mvc/routes/index');
 var users = require('./mvc/routes/users');
@@ -22,13 +20,12 @@ app.set('view engine', 'jade');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
     secret: "oscar",
     resave: false,
     saveUninitialized: false
 }));
-app.use(requestIp.mw());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

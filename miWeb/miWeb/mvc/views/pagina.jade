@@ -1,24 +1,23 @@
 extends layout
 
 block content
-    body(style="background:url('images/restaurante.jpg')")
-      center
-        h21 PRODUCTOS
-        form(method='post', action="/confirmacion")
-            div(class="container_12")
-                h2 BEBIDA
-                h4
-                    each producto, i in productos
-                        if(producto.tipo=="Bebida")
-                            p #{producto.nombre} #{producto.precio}  €
-                            input(name="cantidad" type='number' min="0" max="50" value="" placeholder="CANTIDAD" style="width:200px;height:50px;font-size:30px")
-                div(class="container_12")
-                    h2 COMIDA
-                    h4
-                      each producto, i in productos
-                        if(producto.tipo=="Comida")
-                          p #{producto.nombre} #{producto.precio} €
-                          input(name="cantidad" type='number' min="0" max="50" value="" placeholder="CANTIDAD" style="width:200px;height:50px;font-size:30px")
-                div(class="btns")
-                  button(type='submit')
-                    img(src='images/arrowws2.png', alt='')
+  h1=title
+  script.
+    function enableSelect() {
+        if(document.getElementById("slct").disabled===false)
+            document.getElementById("slct").disabled=true;
+        else
+            document.getElementById("slct").disabled=false;
+    }
+  script.
+    function precioItem() {
+        for (producto in productos){
+            document.getElementById("1").value="1";}
+    }
+  form(method='post', action="/confirmacion")
+    each producto, i in productos
+        p #{producto.nombre} #{producto.precio} €
+        input(name="pepito" type='text' size="2" value="")
+    p
+    input(type="submit" value="Siguiente" class="btn btn-info")
+  

@@ -1,22 +1,4 @@
 ﻿extends layout
   
 block content
-    body(style="background:url('images/salmon.jpg')")
-      center
-        h2
-          span.label.label-success CONFIRMAR DATOS
-        div(class="row" style="margin-left:40%;")
-          div(class="col-sm-4" style="margin-left:center;")
-            div(class="panel panel-primary" style="margin-left:center;")
-              div(class="panel-heading")
-                h3(class="panel-title") Comprueba los datos y dale a confirmar si está todo correcto
-              div(class="panel-body")
-                ul(class="list-group")
-                  h4
-                    each pedido, i in pedidos
-                      li(class="list-group-item") #{pedido.cantidad} #{pedido.nombre}
-         div
-           form(method='post', action="/pedidoRealizado")
-             input(type="button" value="Volver atrás" onclick="history.back()" class="btn btn-lg btn-danger" style="width:200px;height:50px; font-size:30px")
-             input(type="submit" value="Confirmar" class="btn btn-lg btn-info" style="width:200px;height:50px; font-size:30px")
-
+    h1 CONFIRMAR DATOS
