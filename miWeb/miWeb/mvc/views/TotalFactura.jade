@@ -1,13 +1,15 @@
 ﻿extends layout
   
 block content
-    body(style="background:url('images/credit.jpg')")
+    body(style="background:url('images/credito.jpg')")
+        center
+            p
+            h3 GRACIAS POS SU CONFIANZA
         each t, i in total
             center
                 h1 FACTURA
                 p
-                h2 Importe Total= #{t.Total} €
+                h12 IMPORTE TOTAL= #{t.Total} €
                 p
-                h3 Gracias por su confianza
                 form(method='get', action="/")
-                    input(type="submit" value="Inicio" class="btn btn-lg btn-info" style="width:200px;height:50px; font-size:30px")
+                    button(type="submit" class="btn btn-lg btn-info" style="width:200px; height:200px;border-radius:100px; font-size:35px;border:4px;FONT-FAMILY: Verdana") Inicio
